@@ -20,5 +20,19 @@ class config
         $query = "INSERT INTO students(name, age, course) VALUES ('$name',$age,'$course')";
         return mysqli_query($this->conn, $query); //boolean insert(true/false)
     }
+
+    public function fetchAllStudents()
+    {
+        $this->connectDB();
+        $query = "SELECT * FROM students";
+        return mysqli_query($this->conn, $query); //object of mysqli_result class
+    }
+
+    public function deleteStud($id)
+    {
+        $this->connectDB();
+        $query = "DELETE FROM students WHERE id=$id";
+        return mysqli_query($this->conn, $query); //boolean delete(true/false)
+    }
 }
 ?>

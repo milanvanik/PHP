@@ -4,11 +4,11 @@ $config = new config();
 
 $res = $config->connectDB();
 
-if ($res) {
-    echo "<h2> DATABASE SUCCESSFULLY CONNECTED! </h2>";
-} else {
-    echo "<h2> UNABLE TO CONNECT DATABASE. </h2>";
-}
+// if ($res) {
+//     echo "<h2> DATABASE SUCCESSFULLY CONNECTED! </h2>";
+// } else {
+//     echo "<h2> UNABLE TO CONNECT DATABASE. </h2>";
+// }
 
 /*
 super global variable
@@ -24,17 +24,25 @@ if (isset($_REQUEST["btn_submit"])) {
     $age = @$_POST["age"];
     $course = @$_POST["course"];
 
-    echo "<br> Name: $name <br>";
-    echo "Age: $age <br>";
-    echo "Course: $course <br>";
+    // echo "<br> Name: $name <br>";
+    // echo "Age: $age <br>";
+    // echo "Course: $course <br>";
 
     $resSTUD = $config->insertStudent($name, $age, $course);
 
     if ($resSTUD) {
-        echo "Student inserted successfully";
-        header("Location: dashboard.php");
+        // header("Location: dashboard.php");
+        echo '<div class="container col-6 mt-2">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>success! </strong>Student Inserted successfully.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        </div>';
     } else {
-        echo "Student insertion failed";
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Failed!</strong>Student insertion failed.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
     }
 }
 ?>
