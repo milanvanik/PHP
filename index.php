@@ -27,6 +27,15 @@ if (isset($_REQUEST["btn_submit"])) {
     echo "<br> Name: $name <br>";
     echo "Age: $age <br>";
     echo "Course: $course <br>";
+
+    $resSTUD = $config->insertStudent($name, $age, $course);
+
+    if ($resSTUD) {
+        echo "Student inserted successfully";
+        header("Location: dashboard.php");
+    } else {
+        echo "Student insertion failed";
+    }
 }
 ?>
 
@@ -34,28 +43,33 @@ if (isset($_REQUEST["btn_submit"])) {
 
 <head>
     <title>Student Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
-    <a href="index.php">Home</a> | <a href="success.php">SuccessPage</a>
-    <center>
-        <h1>Add Student</h1>
+    <a href="index.php">Home</a> | <a href="dashboard.php">Dashboard</a>
+    <div class="container mt-5">
+        <div class="col-4">
+            <h1>Add Student</h1>
 
-        <form method="POST">
+            <form method="POST" class="pt-2">
 
-            <label>Name</label>
-            <input type="text" name="name" required>
-            <br> <br>
-            <label>Age</label>
-            <input type="number" name="age" required>
-            <br> <br>
-            <label>Course</label>
-            <input type="text" name="course" required>
-            <br> <br>
-            <button name="btn_submit">Add Student</button>
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" required>
+                <br> <br>
+                <label>Age</label>
+                <input type="number" name="age" class="form-control" required>
+                <br> <br>
+                <label>Course</label>
+                <input type="text" name="course" class="form-control" required>
+                <br> <br>
+                <button name="btn_submit" class="btn btn-primary">Add Student</button>
 
-        </form>
-    </center>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
