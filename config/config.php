@@ -31,8 +31,15 @@ class config
     public function deleteStud($id)
     {
         $this->connectDB();
-        $query = "DELETE FROM students WHERE id=$id";
-        return mysqli_query($this->conn, $query); //boolean delete(true/false)
+        $result = $this->fetchSingleStudent($id);
+        $single_student = mysqli_fetch_array($result);
+        if ($single_student) {
+            $query = "DELETE FROM students WHERE id=$id";
+            return mysqli_query($this->conn, $query); //boolean delete(true/false)
+        } else {
+            return false;
+        }
+
     }
 
     public function fetchSingleStudent($id)
