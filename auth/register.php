@@ -6,16 +6,16 @@ include("../config/config.php");
 $config = new Config();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['id'], $_POST['name'], $_POST['email'], $_POST['password'])) {
+    if (isset($_POST['name'], $_POST['email'], $_POST['password'])) {
 
-        $id = $_POST['id'];
+        
         $name = $_POST['name'];
         $email = $_POST['email'];
         $password = $_POST['password'];
 
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        $res = $config->registerUser($id, $name, $email, $hashed_password);
+        $res = $config->registerUser( $name, $email, $hashed_password);
 
         if ($res) {
             http_response_code(201);
@@ -26,13 +26,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             http_response_code(500);
             $arr['status'] = 500;
             $arr['is_error'] = true;
-            $arr['msg'] = "Registration failed (ID or Email might already exist)";
+            $arr['msg'] = "Registration failed";
         }
     } else {
         http_response_code(400);
         $arr['status'] = 400;
         $arr['is_error'] = true;
-        $arr['msg'] = "All fields (id, name, email, password) are required";
+        $arr['msg'] = "All fields (name, email, password) are required";
     }
 } else {
     http_response_code(405);
